@@ -12,7 +12,7 @@
     "author": "Erik Szabó",
     "repository": {
         "type": "git",
-        "url": ""
+        "url": "https://github.com/ErikSzabo/devrik-backend-api"
     },
     "license": "MIT",
     "dependencies": {
