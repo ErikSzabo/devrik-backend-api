@@ -6,6 +6,7 @@ It's using:
 
 -   Express
 -   TypeScript
+-   MongoDb
 
 It's far from done right now.
 
