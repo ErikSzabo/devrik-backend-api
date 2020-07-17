@@ -1,11 +1,11 @@
 import Joi, { Schema } from 'joi';
 
-type content = 'text' | 'list';
+type contentType = 'text' | 'list';
 
 export interface ProjectElement {
     title: string;
-    content: content;
-    contentType: string;
+    content: string;
+    contentType: contentType;
     listItems?: string[];
 }
 
