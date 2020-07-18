@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { projectMini, projects } from './api.model';
+import { projectsPreview, projects } from './api.model';
 import {
     Project,
     ProjectPreview,
@@ -8,7 +8,7 @@ import {
 } from './api.schemas';
 
 const getMinifiedProjects = async (req: Request, res: Response) => {
-    const projects: ProjectPreview[] = await projectMini.find({});
+    const projects: ProjectPreview[] = await projectsPreview.find({});
     res.json(projects);
 };
 
@@ -36,7 +36,7 @@ const addProjectPreview = async (
         return;
     }
 
-    const inserted: ProjectPreview = await projectMini.insert(req.body);
+    const inserted: ProjectPreview = await projectsPreview.insert(req.body);
     res.json(inserted);
 };
 
