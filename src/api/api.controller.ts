@@ -1,13 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
-import { projectsPreview, projects } from './api.model';
-import {
-    Project,
-    ProjectPreview,
-    ProjectSchema,
-    ProjectPreviewSchema,
-} from './api.schemas';
+import { projectsPreview, projects, skills } from './api.model';
+import { Project, ProjectPreview, Skill } from './api.schemas';
 
-const getMinifiedProjects = async (req: Request, res: Response) => {
+const getProjectsPreview = async (req: Request, res: Response) => {
     const projects: ProjectPreview[] = await projectsPreview.find({});
     res.json(projects);
 };
@@ -25,39 +20,31 @@ const getProject = async (req: Request, res: Response, next: NextFunction) => {
     }
 };
 
-const addProjectPreview = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-) => {
-    const validation = ProjectPreviewSchema.validate(req.body);
-    if (validation.error) {
-        next(validation.error);
-        return;
-    }
+const getSkills = async (req: Request, res: Response, next: NextFunction) => {
+    const qSkills: Skill[] = await skills.find({});
+    res.json(qSkills);
+};
 
+const addProjectPreview = async (req: Request, res: Response, next: NextFunction) => {
     const inserted: ProjectPreview = await projectsPreview.insert(req.body);
     res.json(inserted);
 };
 
-const addProjectPage = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-) => {
-    const validation = ProjectSchema.validate(req.body);
-    if (validation.error) {
-        next(validation.error);
-        return;
-    }
-
+const addProjectPage = async (req: Request, res: Response, next: NextFunction) => {
     const inserted: Project = await projects.insert(req.body);
     res.json(inserted);
 };
 
+const addSkill = async (req: Request, res: Response, next: NextFunction) => {
+    const inserted: Skill = await skills.insert(req.body);
+    res.json(inserted);
+};
+
 export default {
-    getMinifiedProjects,
+    getProjectsPreview,
     getProject,
     addProjectPreview,
     addProjectPage,
+    addSkill,
+    getSkills,
 };

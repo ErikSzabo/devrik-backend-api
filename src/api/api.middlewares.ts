@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import { Schema } from 'joi';
 
 export const checkValidation = (req: Request, res: Response, next: NextFunction) => {
     if (!req.body.masterPass) {
@@ -9,6 +10,20 @@ export const checkValidation = (req: Request, res: Response, next: NextFunction)
         next(new Error('Invalid master password!'));
     } else {
         delete req.body.masterPass;
+        next();
+    }
+};
+
+export const validateSchema = (schema: Schema) => (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    const result = schema.validate(req.body);
+    if (result.error) {
+        res.status(422);
+        next(result.error);
+    } else {
         next();
     }
 };

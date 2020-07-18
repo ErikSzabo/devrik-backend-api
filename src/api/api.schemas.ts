@@ -27,6 +27,14 @@ export interface ProjectPreview {
     filterTags: string[];
 }
 
+export interface Skill {
+    _id: string;
+    name: string;
+    description: string;
+    progress: number;
+    icon: string;
+}
+
 export const ProjectPreviewSchema: Schema = Joi.object({
     name: Joi.string().min(3).max(40).required(),
     description: Joi.string().min(20).required(),
@@ -41,4 +49,11 @@ export const ProjectSchema: Schema = Joi.object({
     githubUrl: Joi.string().required().min(15),
     images: Joi.array().required().min(1),
     elements: Joi.array().required().min(1),
+});
+
+export const SkillSchema: Schema = Joi.object({
+    name: Joi.string().min(2).required(),
+    description: Joi.string().min(10).required(),
+    progress: Joi.number().required().min(0).max(100).integer(),
+    icon: Joi.string().min(10),
 });
