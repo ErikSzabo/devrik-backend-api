@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { checkValidation } from './api.middlewares';
 import controller from './api.controller';
 
 const router = Router();
@@ -10,9 +11,9 @@ router.get('/projects', controller.getMinifiedProjects);
 router.get('/projects/:id', controller.getProject);
 
 // Add a new project preview
-router.post('/projects/preview', controller.addProjectPreview);
+router.post('/projects/preview', checkValidation, controller.addProjectPreview);
 
 // Add a new project page
-router.post('/projects/extended', controller.addProjectPage);
+router.post('/projects/extended', checkValidation, controller.addProjectPage);
 
 module.exports = router;
