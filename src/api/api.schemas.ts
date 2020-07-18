@@ -13,6 +13,7 @@ export interface Project {
     _id: string;
     connectId: string;
     name: string;
+    description: string;
     githubUrl: string;
     images: string[];
     elements: ProjectElement[];
@@ -46,6 +47,7 @@ export const ProjectPreviewSchema: Schema = Joi.object({
 export const ProjectSchema: Schema = Joi.object({
     connectId: Joi.string().required().min(10),
     name: Joi.string().min(3).max(40).required(),
+    description: Joi.string().min(3).required(),
     githubUrl: Joi.string().required().min(15),
     images: Joi.array().required().min(1),
     elements: Joi.array().required().min(1),
