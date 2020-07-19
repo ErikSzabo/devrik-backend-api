@@ -5,8 +5,8 @@ import cors from 'cors';
 
 require('dotenv').config();
 
-const middlewares = require('./middlewares');
-const api = require('./api/api.routes');
+import { notFound, errorHandler } from './middlewares';
+import api from './api/api.routes';
 
 const app: Application = express();
 
@@ -23,7 +23,7 @@ app.get('/', (req: Request, res: Response) => {
 
 app.use('/api/v1', api);
 
-app.use(middlewares.notFound);
-app.use(middlewares.errorHandler);
+app.use(notFound);
+app.use(errorHandler);
 
 export default app;

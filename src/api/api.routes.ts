@@ -33,4 +33,4 @@ router.post(
 // Add a new skill
 router.post('/skills', checkValidation, validateSchema(SkillSchema), controller.addSkill);
 
-module.exports = router;
+export default router;
