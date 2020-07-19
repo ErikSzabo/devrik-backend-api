@@ -1,50 +1,92 @@
 import { Request, Response, NextFunction } from 'express';
-import { projectsPreview, projects, skills } from './api.model';
-import { Project, ProjectPreview, Skill } from './api.schemas';
 
-const getProjectsPreview = async (req: Request, res: Response) => {
-    const projects: ProjectPreview[] = await projectsPreview.find({});
-    res.json(projects);
-};
-
-const getProject = async (req: Request, res: Response, next: NextFunction) => {
-    const project: Project | undefined = await projects.findOne({
-        connectId: req.params.id,
-    });
-
-    if (project) {
-        res.json(project);
-    } else {
-        res.status(404);
-        next(new Error('Project not found'));
+const getAllHandler = (collection: any) => async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        const result = await collection.find({});
+        res.json(result);
+    } catch (error) {
+        next(error);
     }
 };
 
-const getSkills = async (req: Request, res: Response, next: NextFunction) => {
-    const qSkills: Skill[] = await skills.find({});
-    res.json(qSkills);
+const getSpecificHandler = (collection: any) => async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        const result = await collection.findOne({
+            _id: req.params.id,
+        });
+
+        if (result) {
+            res.json(result);
+        } else {
+            res.status(404);
+            next(new Error('Not found'));
+        }
+    } catch (error) {
+        next(error);
+    }
 };
 
-const addProjectPreview = async (req: Request, res: Response, next: NextFunction) => {
-    const inserted: ProjectPreview = await projectsPreview.insert(req.body);
-    res.json(inserted);
+const addHandler = (collection: any) => async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        const inserted = await collection.insert(req.body);
+        res.json(inserted);
+    } catch (error) {
+        next(error);
+    }
 };
 
-const addProjectPage = async (req: Request, res: Response, next: NextFunction) => {
-    const inserted: Project = await projects.insert(req.body);
-    res.json(inserted);
+const updateHandler = (collection: any) => async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        const result = await collection.findOneAndUpdate(
+            { _id: req.params.id },
+            { $set: req.body }
+        );
+        res.json(result);
+    } catch (error) {
+        next(error);
+    }
 };
 
-const addSkill = async (req: Request, res: Response, next: NextFunction) => {
-    const inserted: Skill = await skills.insert(req.body);
-    res.json(inserted);
+const deleteHandler = (collection: any) => async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        const result = await collection.findOneAndDelete({
+            _id: req.params.id,
+        });
+        if (result) {
+            res.json(result);
+        } else {
+            res.status(404);
+            next(new Error('Not found'));
+        }
+    } catch (error) {
+        next(error);
+    }
 };
 
 export default {
-    getProjectsPreview,
-    getProject,
-    addProjectPreview,
-    addProjectPage,
-    addSkill,
-    getSkills,
+    getSpecificHandler,
+    getAllHandler,
+    addHandler,
+    updateHandler,
+    deleteHandler,
 };

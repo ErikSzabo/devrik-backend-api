@@ -1,5 +1,7 @@
 import Joi, { Schema } from 'joi';
 
+// Interfaces that I don't use anywhere 😆
+
 type contentType = 'text' | 'list';
 
 export interface ProjectElement {
@@ -36,26 +38,74 @@ export interface Skill {
     icon: string;
 }
 
+// Create -- POST schemas
+
 export const ProjectPreviewSchema: Schema = Joi.object({
     name: Joi.string().min(3).max(40).required(),
     description: Joi.string().min(20).required(),
-    img: Joi.string().required().min(15),
-    tags: Joi.array().required().min(1),
-    filterTags: Joi.array().required(),
+    img: Joi.string().min(15).required(),
+    tags: Joi.array().items(Joi.string()).min(1).required(),
+    filterTags: Joi.array().items(Joi.string()).required(),
 });
 
 export const ProjectSchema: Schema = Joi.object({
-    connectId: Joi.string().required().min(10),
+    connectId: Joi.string().min(10).required(),
     name: Joi.string().min(3).max(40).required(),
     description: Joi.string().min(3).required(),
-    githubUrl: Joi.string().required().min(15),
-    images: Joi.array().required().min(1),
-    elements: Joi.array().required().min(1),
+    githubUrl: Joi.string().min(15).required(),
+    images: Joi.array().items(Joi.string()).min(1).required(),
+    elements: Joi.array()
+        .items(
+            Joi.object({
+                title: Joi.string().min(3).max(40).required(),
+                content: Joi.string().min(20).required(),
+                contentType: Joi.string().allow('text', 'list').required(),
+                listItems: Joi.array().items(Joi.string()),
+            })
+        )
+        .required()
+        .min(1),
 });
 
 export const SkillSchema: Schema = Joi.object({
     name: Joi.string().min(2).required(),
     description: Joi.string().min(10).required(),
-    progress: Joi.number().required().min(0).max(100).integer(),
+    progress: Joi.number().min(0).max(100).integer().required(),
+    icon: Joi.string().min(10).required(),
+});
+
+// Update -- PATCH schemas
+// Yes, these are the same, but no required 😢
+
+export const UProjectPreviewSchema: Schema = Joi.object({
+    name: Joi.string().min(3).max(40),
+    description: Joi.string().min(20),
+    img: Joi.string().min(15),
+    tags: Joi.array().min(1),
+    filterTags: Joi.array(),
+});
+
+export const UProjectSchema: Schema = Joi.object({
+    connectId: Joi.string().min(10),
+    name: Joi.string().min(3).max(40),
+    description: Joi.string().min(3),
+    githubUrl: Joi.string().min(15),
+    images: Joi.array().items(Joi.string()).min(1),
+    elements: Joi.array()
+        .items(
+            Joi.object({
+                title: Joi.string().min(3).max(40),
+                content: Joi.string().min(20),
+                contentType: Joi.string().allow('text', 'list'),
+                listItems: Joi.array().items(Joi.string()),
+            })
+        )
+        .min(1),
+});
+
+export const USkillSchema: Schema = Joi.object({
+    name: Joi.string().min(2),
+    description: Joi.string().min(10),
+    progress: Joi.number().min(0).max(100).integer(),
     icon: Joi.string().min(10),
 });
