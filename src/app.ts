@@ -9,6 +9,7 @@ require('dotenv').config();
 import { notFound, errorHandler } from './middlewares';
 import api from './api/api.routes';
 import auth from './auth/auth.routes';
+import frontpage from './frontpage';
 
 const app: Application = express();
 
@@ -18,7 +19,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/', (req: Request, res: Response) => {
-    res.sendFile(path.resolve(__dirname, './index.html'));
+    res.send(frontpage);
 });
 
 app.use(api);
