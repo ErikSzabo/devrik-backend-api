@@ -98,6 +98,15 @@ export default `
                 <div class="endpoint">
                     <div class="url">
                         <div class="method">GET</div>
+                        <div class="path">/project-page/:id</div>
+                    </div>
+                    <div class="description">
+                        Returns a specific project page by it's connection id.
+                    </div>
+                </div>
+                <div class="endpoint">
+                    <div class="url">
+                        <div class="method">GET</div>
                         <div class="path">/skills</div>
                     </div>
                     <div class="description">Lists all of the skills.</div>

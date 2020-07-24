@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import { projects } from './api.model';
 
 const getAllHandler = (collection: any) => async (
     req: Request,
@@ -83,10 +84,27 @@ const deleteHandler = (collection: any) => async (
     }
 };
 
+const getProjectByConnectId = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const result = await projects.findOne({
+            connectId: req.params.id,
+        });
+        if (result) {
+            res.json(result);
+        } else {
+            res.status(404);
+            next(new Error('Not found'));
+        }
+    } catch (error) {
+        next(error);
+    }
+};
+
 export default {
     getSpecificHandler,
     getAllHandler,
     addHandler,
     updateHandler,
     deleteHandler,
+    getProjectByConnectId,
 };

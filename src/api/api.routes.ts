@@ -22,6 +22,9 @@ router.get('/projects/:id', controller.getSpecificHandler(projectsPreview));
 // Get a specific project
 router.get('/project-pages/:id', controller.getSpecificHandler(projects));
 
+// Get specific project by its connection id
+router.get('/project-page/:id', controller.getProjectByConnectId);
+
 // Get a specific skill
 router.get('/skills/:id', controller.getSpecificHandler(skills));
 
