@@ -38,7 +38,7 @@ export interface Skill {
     icon: string;
 }
 
-// Create -- POST schemas
+// Create -- POST/PUT schemas
 
 export const ProjectPreviewSchema: Schema = Joi.object({
     name: Joi.string().min(3).max(40).required(),
@@ -49,7 +49,7 @@ export const ProjectPreviewSchema: Schema = Joi.object({
 });
 
 export const ProjectSchema: Schema = Joi.object({
-    connectId: Joi.string().min(10).required(),
+    connectId: Joi.string().min(12).required(),
     name: Joi.string().min(3).max(40).required(),
     description: Joi.string().min(3).required(),
     githubUrl: Joi.string().min(15).required(),
@@ -72,40 +72,4 @@ export const SkillSchema: Schema = Joi.object({
     description: Joi.string().min(10).required(),
     progress: Joi.number().min(0).max(100).integer().required(),
     icon: Joi.string().min(10).required(),
-});
-
-// Update -- PATCH schemas
-// Yes, these are the same, but no required 😢
-
-export const UProjectPreviewSchema: Schema = Joi.object({
-    name: Joi.string().min(3).max(40),
-    description: Joi.string().min(20),
-    img: Joi.string().min(15),
-    tags: Joi.array().min(1),
-    filterTags: Joi.array(),
-});
-
-export const UProjectSchema: Schema = Joi.object({
-    connectId: Joi.string().min(10),
-    name: Joi.string().min(3).max(40),
-    description: Joi.string().min(3),
-    githubUrl: Joi.string().min(15),
-    images: Joi.array().items(Joi.string()).min(1),
-    elements: Joi.array()
-        .items(
-            Joi.object({
-                title: Joi.string().min(3).max(40),
-                content: Joi.string().min(20),
-                contentType: Joi.string().allow('text', 'list'),
-                listItems: Joi.array().items(Joi.string()),
-            })
-        )
-        .min(1),
-});
-
-export const USkillSchema: Schema = Joi.object({
-    name: Joi.string().min(2),
-    description: Joi.string().min(10),
-    progress: Joi.number().min(0).max(100).integer(),
-    icon: Joi.string().min(10),
 });

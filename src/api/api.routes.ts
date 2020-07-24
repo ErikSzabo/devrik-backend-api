@@ -1,14 +1,7 @@
 import { Router } from 'express';
 import { skills, projects, projectsPreview } from './api.model';
 import { checkValidation, validateSchema } from './api.middlewares';
-import {
-    ProjectSchema,
-    ProjectPreviewSchema,
-    SkillSchema,
-    UProjectPreviewSchema,
-    UProjectSchema,
-    USkillSchema,
-} from './api.schemas';
+import { ProjectSchema, ProjectPreviewSchema, SkillSchema } from './api.schemas';
 import controller from './api.controller';
 
 const router = Router();
@@ -56,26 +49,26 @@ router.post(
 );
 
 // Update project preview
-router.patch(
+router.put(
     '/projects/preview/:id',
     checkValidation,
-    validateSchema(UProjectPreviewSchema),
+    validateSchema(ProjectPreviewSchema),
     controller.updateHandler(projectsPreview)
 );
 
 // Update project
-router.patch(
+router.put(
     '/projects/extended/:id',
     checkValidation,
-    validateSchema(UProjectSchema),
+    validateSchema(ProjectSchema),
     controller.updateHandler(projects)
 );
 
 // Update skill
-router.patch(
+router.put(
     '/skills/:id',
     checkValidation,
-    validateSchema(USkillSchema),
+    validateSchema(SkillSchema),
     controller.updateHandler(skills)
 );
 

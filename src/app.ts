@@ -1,4 +1,5 @@
 import express, { Application, Request, Response } from 'express';
+import path from 'path';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import cors from 'cors';
@@ -16,12 +17,10 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/', (req: Request, res: Response) => {
-    res.json({
-        message: 'devrik-net API/v1',
-    });
+    res.sendFile(path.resolve(__dirname, './index.html'));
 });
 
-app.use('/api/v1', api);
+app.use(api);
 
 app.use(notFound);
 app.use(errorHandler);
