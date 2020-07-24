@@ -1,8 +1,9 @@
 import { Router } from 'express';
 import { skills, projects, projectsPreview } from './api.model';
-import { checkValidation, validateSchema } from './api.middlewares';
 import { ProjectSchema, ProjectPreviewSchema, SkillSchema } from './api.schemas';
 import controller from './api.controller';
+import { validateSchema } from '../middlewares';
+import { checkValidation } from './api.middlewares';
 
 const router = Router();
 

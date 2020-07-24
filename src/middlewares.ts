@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import { Schema } from 'joi';
 
 export const notFound = (req: Request, res: Response, next: NextFunction) => {
     res.status(404);
@@ -18,4 +19,18 @@ export const errorHandler = (
         error: err.message,
         stack: process.env.NODE_ENV === 'production' ? '🥞' : err.stack,
     });
+};
+
+export const validateSchema = (schema: Schema) => (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    const result = schema.validate(req.body);
+    if (result.error) {
+        res.status(422);
+        next(result.error);
+    } else {
+        next();
+    }
 };

@@ -8,6 +8,7 @@ require('dotenv').config();
 
 import { notFound, errorHandler } from './middlewares';
 import api from './api/api.routes';
+import auth from './auth/auth.routes';
 
 const app: Application = express();
 
@@ -21,6 +22,7 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.use(api);
+app.use(auth);
 
 app.use(notFound);
 app.use(errorHandler);
