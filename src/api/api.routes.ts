@@ -7,90 +7,123 @@ import { checkValidation } from './api.middlewares';
 
 const router = Router();
 
-// Get the project previews
+// @route    GET /projects
+// @desc     Gets all the project list items
+// @access   Public
 router.get('/projects', controller.getAllHandler(projectsPreview));
 
-// Get all the big projects
+// @route    GET /project-pages
+// @desc     Gets all of the project pages
+// @access   Public
 router.get('/project-pages', controller.getAllHandler(projects));
 
-// Get all the skills
+// @route    GET /skills
+// @desc     Gets all of the skills
+// @access   Public
 router.get('/skills', controller.getAllHandler(skills));
 
-// Get a specific project preview
+// @route    GET /projects/:id
+// @desc     Gets a specific project list item
+// @access   Public
 router.get('/projects/:id', controller.getSpecificHandler(projectsPreview));
 
-// Get a specific project
+// @route    GET /project-pages/:id
+// @desc     Gets a specific project page
+// @access   Public
 router.get('/project-pages/:id', controller.getSpecificHandler(projects));
 
-// Get specific project by its connection id
+// @route    GET /project-page/:id
+// @desc     Gets a specific project page by its connection ID
+//           which is bounded to a project list item
+// @access   Public
 router.get('/project-page/:id', controller.getProjectByConnectId);
 
-// Get a specific skill
+// @route    GET /skills/:id
+// @desc     Gets a specific skill
+// @access   Public
 router.get('/skills/:id', controller.getSpecificHandler(skills));
 
-// Add a new project preview
+// @route    POST /projects/preview
+// @desc     Adds a new project list item
+// @access   Private
 router.post(
-    '/projects/preview',
-    checkValidation,
-    validateSchema(ProjectPreviewSchema),
-    controller.addHandler(projectsPreview)
+  '/projects/preview',
+  checkValidation,
+  validateSchema(ProjectPreviewSchema),
+  controller.addHandler(projectsPreview)
 );
 
-// Add a new project page
+// @route    POST /projects/extended
+// @desc     Adds a new project page
+// @access   Private
 router.post(
-    '/projects/extended',
-    checkValidation,
-    validateSchema(ProjectSchema),
-    controller.addHandler(projects)
+  '/projects/extended',
+  checkValidation,
+  validateSchema(ProjectSchema),
+  controller.addHandler(projects)
 );
 
-// Add a new skill
+// @route    POST /skills
+// @desc     Adds a new skill
+// @access   Private
 router.post(
-    '/skills',
-    checkValidation,
-    validateSchema(SkillSchema),
-    controller.addHandler(skills)
+  '/skills',
+  checkValidation,
+  validateSchema(SkillSchema),
+  controller.addHandler(skills)
 );
 
-// Update project preview
+// @route    PUT /projects/preview/:id
+// @desc     Updates a project list item
+// @access   Private
 router.put(
-    '/projects/preview/:id',
-    checkValidation,
-    validateSchema(ProjectPreviewSchema),
-    controller.updateHandler(projectsPreview)
+  '/projects/preview/:id',
+  checkValidation,
+  validateSchema(ProjectPreviewSchema),
+  controller.updateHandler(projectsPreview)
 );
 
-// Update project
+// @route    PUT /projects/extended/:id
+// @desc     Updates a project page
+// @access   Private
 router.put(
-    '/projects/extended/:id',
-    checkValidation,
-    validateSchema(ProjectSchema),
-    controller.updateHandler(projects)
+  '/projects/extended/:id',
+  checkValidation,
+  validateSchema(ProjectSchema),
+  controller.updateHandler(projects)
 );
 
-// Update skill
+// @route    PUT /skills/:id
+// @desc     Updates a skill
+// @access   Private
 router.put(
-    '/skills/:id',
-    checkValidation,
-    validateSchema(SkillSchema),
-    controller.updateHandler(skills)
+  '/skills/:id',
+  checkValidation,
+  validateSchema(SkillSchema),
+  controller.updateHandler(skills)
 );
 
-// Delete project preview
+// @route    DELETE /projects/preview/:id
+// @desc     Deletes a project list item
+// @access   Private
 router.delete(
-    '/projects/preview/:id',
-    checkValidation,
-    controller.deleteHandler(projectsPreview)
+  '/projects/preview/:id',
+  checkValidation,
+  controller.deleteHandler(projectsPreview)
 );
 
-// Delete project
+// @route    DELETE /projects/extended/:id
+// @desc     Deletes a project page
+// @access   Private
 router.delete(
-    '/projects/extended/:id',
-    checkValidation,
-    controller.deleteHandler(projects)
+  '/projects/extended/:id',
+  checkValidation,
+  controller.deleteHandler(projects)
 );
 
-// Delete skill
+// @route    DELETE /skills/:id
+// @desc     Deletes a skill
+// @access   Private
 router.delete('/skills/:id', checkValidation, controller.deleteHandler(skills));
 
 export default router;

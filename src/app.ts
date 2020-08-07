@@ -19,7 +19,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/', (req: Request, res: Response) => {
-    res.send(frontpage);
+  res.send(frontpage);
 });
 
 app.use(api);
