@@ -9,7 +9,6 @@ require('dotenv').config();
 import { notFound, errorHandler } from './middlewares';
 import api from './api/api.routes';
 import auth from './auth/auth.routes';
-import frontpage from './frontpage';
 
 const app: Application = express();
 
@@ -19,7 +18,9 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/', (req: Request, res: Response) => {
-  res.send(frontpage);
+  res.json({
+    message: 'devrik API v1.0',
+  });
 });
 
 app.use(api);
