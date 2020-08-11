@@ -4,7 +4,6 @@ import Joi, { Schema } from 'joi';
  * Used to validate a whole project page.
  */
 export const ProjectSchema: Schema = Joi.object({
-  connectId: Joi.string().min(12).required(),
   name: Joi.string().min(3).max(40).required(),
   description: Joi.string().min(3).required(),
   githubUrl: Joi.string().min(15).required(),
