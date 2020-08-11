@@ -20,17 +20,7 @@ export const ProjectSchema: Schema = Joi.object({
   description: Joi.string().min(3).required(),
   githubUrl: Joi.string().min(15).required(),
   images: Joi.array().items(Joi.string()).min(1).required(),
-  elements: Joi.array()
-    .items(
-      Joi.object({
-        title: Joi.string().min(3).max(40).required(),
-        content: Joi.string().min(20).required(),
-        contentType: Joi.string().allow('text', 'list').required(),
-        listItems: Joi.array().items(Joi.string()),
-      })
-    )
-    .required()
-    .min(1),
+  content: Joi.string().min(3).required(),
 });
 
 /**
