@@ -1,10 +1,8 @@
 # devrik backend API
 
-This API powers and will power my portfolio website.
+This API powers and will power my portfolio website (and maybe other things in the future).
 
-Eventually, it will have admin login feature for me, and for those, who will edit projects, skills, and any other future content on the page.
-
-It's far from done...
+It has an admin login feature for me, and for those, who will edit projects, skills, and any other future content on the page.
 
 # Endpoints
 
