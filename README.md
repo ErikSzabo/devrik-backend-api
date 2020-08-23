@@ -8,16 +8,10 @@ It's far from done...
 
 # Endpoints
 
-**GET** minified projects
+**GET** projects
 
 ```
 /projects
-```
-
-**GET** project pages which can be transered to a web page
-
-```
-/project-pages
 ```
 
 **GET** skills
@@ -33,13 +27,7 @@ It's far from done...
 **POST** add a new minified project
 
 ```
-/projects/preview
-```
-
-**POST** add a new project page
-
-```
-/projects/extended
+/projects
 ```
 
 **POST** add a new skill
