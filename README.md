@@ -1,23 +1,15 @@
 # devrik backend API
 
-This API powers and will power my portfolio website.
+This API powers and will power my portfolio website (and maybe other things in the future).
 
-Eventually, it will have admin login feature for me, and for those, who will edit projects, skills, and any other future content on the page.
-
-It's far from done...
+It has an admin login feature for me, and for those, who will edit projects, skills, and any other future content on the page.
 
 # Endpoints
 
-**GET** minified projects
+**GET** projects
 
 ```
 /projects
-```
-
-**GET** project pages which can be transered to a web page
-
-```
-/project-pages
 ```
 
 **GET** skills
@@ -33,13 +25,7 @@ It's far from done...
 **POST** add a new minified project
 
 ```
-/projects/preview
-```
-
-**POST** add a new project page
-
-```
-/projects/extended
+/projects
 ```
 
 **POST** add a new skill
